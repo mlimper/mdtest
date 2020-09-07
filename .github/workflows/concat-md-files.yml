@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  concat-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: concat-files
+        run: |
+          expr 3 + 7 > dist/README.md
+      - name: upload result to dist directory
+        uses: actions/upload-artifact@v2
+        with:
+          name: full-markdown
+          path: dist/README.md
+     
