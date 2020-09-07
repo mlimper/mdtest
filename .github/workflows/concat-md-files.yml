@@ -11,16 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-
-      #- uses: muesli/readme-scribe@master
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
-      #  with:
-      #    template: "templates/README.md.tpl"
-      #    writeTo: "README.md"
       
       - shell: bash
-        run: cat subsec1/README.md subsec2/README.md > README.md
+        run: cat subsec1/README-base.md subsec1/README.md subsec2/README.md > README.md
 
       - uses: stefanzweifel/git-auto-commit-action@v2
         env:
