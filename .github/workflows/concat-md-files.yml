@@ -6,14 +6,14 @@ on: [push]
  #   - cron: "0 */1 * * *"
 
 jobs:
-  markscribe:
+  concat-md-files:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@master
       
       - shell: bash
-        run: cat subsec1/README-base.md subsec1/README.md subsec2/README.md > README.md
+        run: cat README-base.md subsec1/README.md subsec2/README.md > README.md
 
       - uses: stefanzweifel/git-auto-commit-action@v2
         env:
