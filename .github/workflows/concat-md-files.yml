@@ -1,22 +1,28 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Update README
 
 on: [push]
+  #push:
+  #schedule:
+ #   - cron: "0 */1 * * *"
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  concat-job:
+  markscribe:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: concat-files
-        run: |
-          expr 3 + 7 > dist/README.md
-      - name: upload result to dist directory
-        uses: actions/upload-artifact@v2
+      - uses: actions/checkout@master
+
+      - uses: muesli/readme-scribe@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
         with:
-          name: full-markdown
-          path: dist/README.md
-     
+          template: "templates/README.md.tpl"
+          writeTo: "README.md"
+
+      - uses: stefanzweifel/git-auto-commit-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit_message: Update generated README
+          branch: master
+    
