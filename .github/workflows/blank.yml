@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: homework
-          path: dist/math-homework.txt
+          path: dist/README.md
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
